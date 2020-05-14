@@ -1,0 +1,1 @@
+import{About}from"./about.js";export*from"./about.js";export default About;

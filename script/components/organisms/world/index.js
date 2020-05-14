@@ -1,0 +1,1 @@
+import{World}from"./world.js";export*from"./world.js";export default World;
