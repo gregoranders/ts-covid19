@@ -17,6 +17,7 @@
     "context": "./script/context.js",
     "registerServiceWorker": "./script/registerServiceWorker.js",
     "model": "./script/model/index.js",
+    "worker": "./worker.js",
     "routes": "./script/routes.js",
     "versions": "./script/versions.js",
     "components/molecules/navigation": "./script/components/molecules/navigation/index.js",
