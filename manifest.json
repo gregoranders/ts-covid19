@@ -6,7 +6,7 @@
   "lang": "en-US",
   "display": "standalone",
   "orientation": "any",
-  "start_url": "/",
+  "start_url": "/ts-covid19/",
   "background_color": "#000",
   "theme_color": "#000",
   "icons": [
