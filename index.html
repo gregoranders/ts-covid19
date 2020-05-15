@@ -1,64 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset=utf-8>
-  <meta http-equiv=X-UA-Compatible content="IE=edge">
-  <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
-  <meta name=robots content="index, follow">
-  <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=yes">
-  <meta name=description content="ts-covid19 - Covid-19 Dashboard in TypeScript">
-  <meta name=keywords content="COVID-19, covid19, JHU, CSSE, Johns Hopkins University, TypeScript, React">
-  <meta name=author content="Gregor Anders">
-  <meta name=mobile-web-app-capable content=yes>
-  <meta name=theme-color content=#000>
-  <meta name=apple-mobile-web-app-capable content=yes>
-  <meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
-  <meta name="application-name" content="Covid-19 Dashboard in TypeScript">
-  <title>ts-covid19 - Covid-19 Dashboard in TypeScript</title>
-  <link rel="manifest" href="https://gregoranders.github.io/ts-covid19/manifest.json">
-  <link rel="shortcut icon" href="https://gregoranders.github.io/ts-covid19/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16"
-    href="https://gregoranders.github.io/ts-covid19/favicon/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-    href="https://gregoranders.github.io/ts-covid19/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="48x48"
-    href="https://gregoranders.github.io/ts-covid19/favicon/favicon-48x48.png">
-  <link rel="apple-touch-icon" sizes="57x57"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="167x167"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-167x167.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-180x180.png">
-  <link rel="apple-touch-icon" sizes="1024x1024"
-    href="https://gregoranders.github.io/ts-covid19/favicon/apple-touch-icon-1024x1024.png">
-  <link rel=stylesheet
-    href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab|Roboto:300,400,500,700,800,900&display=swap">
-  <link rel=stylesheet href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <script defer type=module src="https://gregoranders.github.io/ts-covid19/es-module-shims.js"></script>
-  <script type=importmap-shim src="https://gregoranders.github.io/ts-covid19/es-modules-shims.json"></script>
-
-</head>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id=app>
-    <script type=module-shim>import "index";</script>
-  </div>
-</body>
-
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=yes" />
+    <meta name="description" content="ts-covid19 - Covid-19 Dashboard in TypeScript" />
+    <meta name="keywords" content="COVID-19, covid19, JHU, CSSE, Johns Hopkins University, TypeScript, React" />
+    <meta name="author" content="Gregor Anders" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="application-name" content="Covid-19 Dashboard in TypeScript" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="./favicon/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="./favicon/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="./favicon/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="./favicon/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="./favicon/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="./favicon/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="./favicon/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="./favicon/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="./favicon/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="./favicon/apple-touch-icon-167x167.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon-180x180.png" />
+    <link rel="apple-touch-icon" sizes="1024x1024" href="./favicon/apple-touch-icon-1024x1024.png" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab|Roboto:300,400,500,700,800,900&display=swap"
+    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <base href="https://gregoranders.github.io/ts-covid19/" />
+    <style>
+      body {
+        height: 99vh;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "./vendor/react/react.js",
+          "clsx": "./vendor/clsx/clsx.js",
+          "react-dom": "./vendor/react-dom/react-dom.js",
+          "react-router": "./vendor/react-router/react-router.js",
+          "react-router-dom": "./vendor/react-router-dom/react-router-dom.js",
+          "react-is": "./vendor/react-is/react-is.js",
+          "recharts": "./vendor/recharts/recharts.js",
+          "prop-types": "./vendor/prop-types/prop-types.js",
+          "@material-ui/core": "./vendor/@material-ui/core.js",
+          "@material-ui/icons": "./vendor/@material-ui/icons.js",
+          "@material-ui/styles": "./vendor/@material-ui/styles.js",
+          "react-virtualized": "./vendor/react-virtualized/react-virtualized.js",
+          "index": "./script/index.js",
+          "application": "./script/application.js",
+          "context": "./script/context.js",
+          "registerServiceWorker": "./script/registerServiceWorker.js",
+          "model": "./script/model/index.js",
+          "routes": "./script/routes.js",
+          "versions": "./script/versions.js",
+          "components/molecules/navigation": "./script/components/molecules/navigation/index.js",
+          "components/organisms/header": "./script/components/organisms/header/index.js",
+          "components/organisms/main": "./script/components/organisms/main/index.js",
+          "components/organisms/footer": "./script/components/organisms/footer/index.js",
+          "components/organisms/countries": "./script/components/organisms/countries/index.js",
+          "components/organisms/world": "./script/components/organisms/world/index.js",
+          "components/templates/default": "./script/components/templates/default/index.js",
+          "components/pages/home": "./script/components/pages/home/index.js",
+          "components/pages/about": "./script/components/pages/about/index.js"
+        }
+      }
+    </script>
+    <title>ts-covid19 - Covid-19 Dashboard in TypeScript</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="app">
+      <script defer type="module">
+        import 'index';
+      </script>
+    </div>
+  </body>
 </html>

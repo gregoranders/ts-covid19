@@ -1,1 +1,14 @@
-import React from"react";import{BrowserRouter,Redirect,Route,Switch}from"react-router-dom";const About=React.lazy(()=>import("components/pages/about")),Home=React.lazy(()=>import("components/pages/home"));export const Routes=()=>React.createElement(BrowserRouter,null,React.createElement(Switch,null,React.createElement(Route,{path:"/",exact:!0,component:Home}),React.createElement(Route,{path:"/about",component:About}),React.createElement(Redirect,{to:"/"})));Routes.displayName="Routes";export default Routes;
+import React from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+const About = React.lazy(() => import('components/pages/about'));
+const Home = React.lazy(() => import('components/pages/home'));
+export const Routes = () => {
+    return (React.createElement(BrowserRouter, null,
+        React.createElement(Switch, null,
+            React.createElement(Route, { path: "/", exact: true, component: Home }),
+            React.createElement(Route, { path: "/about", component: About }),
+            React.createElement(Redirect, { to: "/" }))));
+};
+Routes.displayName = 'Routes';
+export default Routes;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm91dGVzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL3NjcmlwdC9yb3V0ZXMudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sS0FBNEIsTUFBTSxPQUFPLENBQUM7QUFDakQsT0FBTyxFQUFFLGFBQWEsRUFBRSxRQUFRLEVBQUUsS0FBSyxFQUFFLE1BQU0sRUFBRSxNQUFNLGtCQUFrQixDQUFDO0FBRTFFLE1BQU0sS0FBSyxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLENBQUMsTUFBTSxDQUFDLHdCQUF3QixDQUFDLENBQUMsQ0FBQztBQUNqRSxNQUFNLElBQUksR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxDQUFDLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDLENBQUM7QUFFL0QsTUFBTSxDQUFDLE1BQU0sTUFBTSxHQUFzQixHQUFHLEVBQUU7SUFDNUMsT0FBTyxDQUNMLG9CQUFDLGFBQWE7UUFDWixvQkFBQyxNQUFNO1lBQ0wsb0JBQUMsS0FBSyxJQUFDLElBQUksRUFBQyxHQUFHLEVBQUMsS0FBSyxFQUFFLElBQUksRUFBRSxTQUFTLEVBQUUsSUFBSSxHQUFJO1lBQ2hELG9CQUFDLEtBQUssSUFBQyxJQUFJLEVBQUMsUUFBUSxFQUFDLFNBQVMsRUFBRSxLQUFLLEdBQUk7WUFDekMsb0JBQUMsUUFBUSxJQUFDLEVBQUUsRUFBQyxHQUFHLEdBQUcsQ0FDWixDQUNLLENBQ2pCLENBQUM7QUFDSixDQUFDLENBQUM7QUFFRixNQUFNLENBQUMsV0FBVyxHQUFHLFFBQVEsQ0FBQztBQUU5QixlQUFlLE1BQU0sQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCwgeyBGdW5jdGlvbkNvbXBvbmVudCB9IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IEJyb3dzZXJSb3V0ZXIsIFJlZGlyZWN0LCBSb3V0ZSwgU3dpdGNoIH0gZnJvbSAncmVhY3Qtcm91dGVyLWRvbSc7XG5cbmNvbnN0IEFib3V0ID0gUmVhY3QubGF6eSgoKSA9PiBpbXBvcnQoJ2NvbXBvbmVudHMvcGFnZXMvYWJvdXQnKSk7XG5jb25zdCBIb21lID0gUmVhY3QubGF6eSgoKSA9PiBpbXBvcnQoJ2NvbXBvbmVudHMvcGFnZXMvaG9tZScpKTtcblxuZXhwb3J0IGNvbnN0IFJvdXRlczogRnVuY3Rpb25Db21wb25lbnQgPSAoKSA9PiB7XG4gIHJldHVybiAoXG4gICAgPEJyb3dzZXJSb3V0ZXI+XG4gICAgICA8U3dpdGNoPlxuICAgICAgICA8Um91dGUgcGF0aD1cIi9cIiBleGFjdD17dHJ1ZX0gY29tcG9uZW50PXtIb21lfSAvPlxuICAgICAgICA8Um91dGUgcGF0aD1cIi9hYm91dFwiIGNvbXBvbmVudD17QWJvdXR9IC8+XG4gICAgICAgIDxSZWRpcmVjdCB0bz1cIi9cIiAvPlxuICAgICAgPC9Td2l0Y2g+XG4gICAgPC9Ccm93c2VyUm91dGVyPlxuICApO1xufTtcblxuUm91dGVzLmRpc3BsYXlOYW1lID0gJ1JvdXRlcyc7XG5cbmV4cG9ydCBkZWZhdWx0IFJvdXRlcztcbiJdfQ==

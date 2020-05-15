@@ -1,1 +1,45 @@
-import React from"react";import{ModelProcessor,covidWorker}from"model";export const webWorker=()=>{const code=covidWorker.toString(),blob=new Blob(["("+code+")()"]);return new Worker(URL.createObjectURL(blob))};export var Theme;!function(Theme){Theme.LIGHT="light",Theme.DARK="dark"}(Theme||(Theme={}));export const ctx={theme:Theme.DARK,processor:new ModelProcessor([]),updating:!1,toggleTheme:()=>{switch(ctx.theme){case Theme.DARK:ctx.theme=Theme.LIGHT;break;default:case Theme.LIGHT:ctx.theme=Theme.DARK}},updateModel:()=>{const worker=webWorker();ctx.updating||(worker.onmessage=e=>{ctx.processor=new ModelProcessor(e.data),ctx.updating=!1},worker.postMessage(ctx.updating),ctx.updating=!0)}};export const Context=React.createContext(ctx);export default Context;
+import React from 'react';
+import { ModelProcessor, covidWorker } from 'model';
+export const webWorker = () => {
+    const code = covidWorker.toString();
+    const blob = new Blob(['(' + code + ')()']);
+    return new Worker(URL.createObjectURL(blob));
+};
+export var Theme;
+(function (Theme) {
+    Theme["LIGHT"] = "light";
+    Theme["DARK"] = "dark";
+})(Theme || (Theme = {}));
+export const ctx = {
+    theme: Theme.DARK,
+    densePadding: true,
+    toggleTheme: () => {
+        switch (ctx.theme) {
+            case Theme.DARK:
+                ctx.theme = Theme.LIGHT;
+                break;
+            default:
+            case Theme.LIGHT:
+                ctx.theme = Theme.DARK;
+        }
+    },
+    toggleDensePadding: () => {
+        ctx.densePadding != ctx.densePadding;
+    },
+    processor: new ModelProcessor([]),
+    updating: false,
+    updateModel: () => {
+        const worker = webWorker();
+        if (!ctx.updating) {
+            worker.onmessage = (e) => {
+                ctx.processor = new ModelProcessor(e.data);
+                ctx.updating = false;
+            };
+            worker.postMessage(ctx.updating);
+            ctx.updating = true;
+        }
+    },
+};
+export const Context = React.createContext(ctx);
+export default Context;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udGV4dC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9zY3JpcHQvY29udGV4dC50c3giXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxLQUFrQyxNQUFNLE9BQU8sQ0FBQztBQUV2RCxPQUFPLEVBQUUsY0FBYyxFQUFFLFdBQVcsRUFBRSxNQUFNLE9BQU8sQ0FBQztBQUVwRCxNQUFNLENBQUMsTUFBTSxTQUFTLEdBQUcsR0FBRyxFQUFFO0lBQzVCLE1BQU0sSUFBSSxHQUFHLFdBQVcsQ0FBQyxRQUFRLEVBQUUsQ0FBQztJQUNwQyxNQUFNLElBQUksR0FBRyxJQUFJLElBQUksQ0FBQyxDQUFDLEdBQUcsR0FBRyxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQztJQUM1QyxPQUFPLElBQUksTUFBTSxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztBQUMvQyxDQUFDLENBQUM7QUFFRixNQUFNLENBQU4sSUFBWSxLQUdYO0FBSEQsV0FBWSxLQUFLO0lBQ2Ysd0JBQWUsQ0FBQTtJQUNmLHNCQUFhLENBQUE7QUFDZixDQUFDLEVBSFcsS0FBSyxLQUFMLEtBQUssUUFHaEI7QUFhRCxNQUFNLENBQUMsTUFBTSxHQUFHLEdBQWdCO0lBQzlCLEtBQUssRUFBRSxLQUFLLENBQUMsSUFBSTtJQUNqQixZQUFZLEVBQUUsSUFBSTtJQUNsQixXQUFXLEVBQUUsR0FBRyxFQUFFO1FBQ2hCLFFBQVEsR0FBRyxDQUFDLEtBQUssRUFBRTtZQUNqQixLQUFLLEtBQUssQ0FBQyxJQUFJO2dCQUNiLEdBQUcsQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFDLEtBQUssQ0FBQztnQkFDeEIsTUFBTTtZQUNSLFFBQVE7WUFDUixLQUFLLEtBQUssQ0FBQyxLQUFLO2dCQUNkLEdBQUcsQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFDLElBQUksQ0FBQztTQUMxQjtJQUNILENBQUM7SUFDRCxrQkFBa0IsRUFBRSxHQUFHLEVBQUU7UUFDdkIsR0FBRyxDQUFDLFlBQVksSUFBSSxHQUFHLENBQUMsWUFBWSxDQUFDO0lBQ3ZDLENBQUM7SUFDRCxTQUFTLEVBQUUsSUFBSSxjQUFjLENBQUMsRUFBRSxDQUFDO0lBQ2pDLFFBQVEsRUFBRSxLQUFLO0lBQ2YsV0FBVyxFQUFFLEdBQUcsRUFBRTtRQUNoQixNQUFNLE1BQU0sR0FBRyxTQUFTLEVBQUUsQ0FBQztRQUMzQixJQUFJLENBQUMsR0FBRyxDQUFDLFFBQVEsRUFBRTtZQUNqQixNQUFNLENBQUMsU0FBUyxHQUFHLENBQUMsQ0FBQyxFQUFFLEVBQUU7Z0JBQ3ZCLEdBQUcsQ0FBQyxTQUFTLEdBQUcsSUFBSSxjQUFjLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDO2dCQUMzQyxHQUFHLENBQUMsUUFBUSxHQUFHLEtBQUssQ0FBQztZQUN2QixDQUFDLENBQUM7WUFDRixNQUFNLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxRQUFRLENBQUMsQ0FBQztZQUNqQyxHQUFHLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQztTQUNyQjtJQUNILENBQUM7Q0FDRixDQUFDO0FBRUYsTUFBTSxDQUFDLE1BQU0sT0FBTyxHQUE4QixLQUFLLENBQUMsYUFBYSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBRTNFLGVBQWUsT0FBTyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0LCB7IENvbnRleHQgYXMgUmVhY3RDb250ZXh0IH0gZnJvbSAncmVhY3QnO1xuXG5pbXBvcnQgeyBNb2RlbFByb2Nlc3NvciwgY292aWRXb3JrZXIgfSBmcm9tICdtb2RlbCc7XG5cbmV4cG9ydCBjb25zdCB3ZWJXb3JrZXIgPSAoKSA9PiB7XG4gIGNvbnN0IGNvZGUgPSBjb3ZpZFdvcmtlci50b1N0cmluZygpO1xuICBjb25zdCBibG9iID0gbmV3IEJsb2IoWycoJyArIGNvZGUgKyAnKSgpJ10pO1xuICByZXR1cm4gbmV3IFdvcmtlcihVUkwuY3JlYXRlT2JqZWN0VVJMKGJsb2IpKTtcbn07XG5cbmV4cG9ydCBlbnVtIFRoZW1lIHtcbiAgTElHSFQgPSAnbGlnaHQnLFxuICBEQVJLID0gJ2RhcmsnLFxufVxuXG5leHBvcnQgdHlwZSBDb250ZXh0VHlwZSA9IHtcbiAgdGhlbWU6IFRoZW1lO1xuICBkZW5zZVBhZGRpbmc6IGJvb2xlYW47XG4gIHRvZ2dsZVRoZW1lOiAoKSA9PiB2b2lkO1xuICB0b2dnbGVEZW5zZVBhZGRpbmc6ICgpID0+IHZvaWQ7XG5cbiAgcHJvY2Vzc29yOiBNb2RlbFByb2Nlc3NvcjtcbiAgdXBkYXRpbmc6IGJvb2xlYW47XG4gIHVwZGF0ZU1vZGVsOiAoKSA9PiB2b2lkO1xufTtcblxuZXhwb3J0IGNvbnN0IGN0eDogQ29udGV4dFR5cGUgPSB7XG4gIHRoZW1lOiBUaGVtZS5EQVJLLFxuICBkZW5zZVBhZGRpbmc6IHRydWUsXG4gIHRvZ2dsZVRoZW1lOiAoKSA9PiB7XG4gICAgc3dpdGNoIChjdHgudGhlbWUpIHtcbiAgICAgIGNhc2UgVGhlbWUuREFSSzpcbiAgICAgICAgY3R4LnRoZW1lID0gVGhlbWUuTElHSFQ7XG4gICAgICAgIGJyZWFrO1xuICAgICAgZGVmYXVsdDpcbiAgICAgIGNhc2UgVGhlbWUuTElHSFQ6XG4gICAgICAgIGN0eC50aGVtZSA9IFRoZW1lLkRBUks7XG4gICAgfVxuICB9LFxuICB0b2dnbGVEZW5zZVBhZGRpbmc6ICgpID0+IHtcbiAgICBjdHguZGVuc2VQYWRkaW5nICE9IGN0eC5kZW5zZVBhZGRpbmc7XG4gIH0sXG4gIHByb2Nlc3NvcjogbmV3IE1vZGVsUHJvY2Vzc29yKFtdKSxcbiAgdXBkYXRpbmc6IGZhbHNlLFxuICB1cGRhdGVNb2RlbDogKCkgPT4ge1xuICAgIGNvbnN0IHdvcmtlciA9IHdlYldvcmtlcigpO1xuICAgIGlmICghY3R4LnVwZGF0aW5nKSB7XG4gICAgICB3b3JrZXIub25tZXNzYWdlID0gKGUpID0+IHtcbiAgICAgICAgY3R4LnByb2Nlc3NvciA9IG5ldyBNb2RlbFByb2Nlc3NvcihlLmRhdGEpO1xuICAgICAgICBjdHgudXBkYXRpbmcgPSBmYWxzZTtcbiAgICAgIH07XG4gICAgICB3b3JrZXIucG9zdE1lc3NhZ2UoY3R4LnVwZGF0aW5nKTtcbiAgICAgIGN0eC51cGRhdGluZyA9IHRydWU7XG4gICAgfVxuICB9LFxufTtcblxuZXhwb3J0IGNvbnN0IENvbnRleHQ6IFJlYWN0Q29udGV4dDxDb250ZXh0VHlwZT4gPSBSZWFjdC5jcmVhdGVDb250ZXh0KGN0eCk7XG5cbmV4cG9ydCBkZWZhdWx0IENvbnRleHQ7XG4iXX0=

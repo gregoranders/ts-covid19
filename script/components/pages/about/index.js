@@ -1,1 +1,4 @@
-import{About}from"./about.js";export*from"./about.js";export default About;
+import { About } from "./about.js";
+export * from "./about.js";
+export default About;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvc2NyaXB0L2NvbXBvbmVudHMvcGFnZXMvYWJvdXQvaW5kZXgudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxLQUFLLEVBQUUsbUJBQWdCO0FBRWhDLDJCQUF3QjtBQUV4QixlQUFlLEtBQUssQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEFib3V0IH0gZnJvbSAnLi9hYm91dCc7XG5cbmV4cG9ydCAqIGZyb20gJy4vYWJvdXQnO1xuXG5leHBvcnQgZGVmYXVsdCBBYm91dDtcbiJdfQ==

@@ -1,1 +1,4 @@
-import{Home}from"./home.js";export*from"./home.js";export default Home;
+import { Home } from "./home.js";
+export * from "./home.js";
+export default Home;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvc2NyaXB0L2NvbXBvbmVudHMvcGFnZXMvaG9tZS9pbmRleC50c3giXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLElBQUksRUFBRSxrQkFBZTtBQUU5QiwwQkFBdUI7QUFFdkIsZUFBZSxJQUFJLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBIb21lIH0gZnJvbSAnLi9ob21lJztcblxuZXhwb3J0ICogZnJvbSAnLi9ob21lJztcblxuZXhwb3J0IGRlZmF1bHQgSG9tZTtcbiJdfQ==
