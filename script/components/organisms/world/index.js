@@ -1,4 +1,1 @@
-import { World } from "./world.js";
-export * from "./world.js";
-export default World;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvc2NyaXB0L2NvbXBvbmVudHMvb3JnYW5pc21zL3dvcmxkL2luZGV4LnRzeCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsS0FBSyxFQUFFLG1CQUFnQjtBQUVoQywyQkFBd0I7QUFFeEIsZUFBZSxLQUFLLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBXb3JsZCB9IGZyb20gJy4vd29ybGQnO1xuXG5leHBvcnQgKiBmcm9tICcuL3dvcmxkJztcblxuZXhwb3J0IGRlZmF1bHQgV29ybGQ7XG4iXX0=
+import{World}from"./world.js";export*from"./world.js";export default World;

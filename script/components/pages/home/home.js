@@ -1,18 +1,1 @@
-import React, { useContext } from 'react';
-import { Context } from 'context';
-import { Layout } from 'components/templates/default';
-import { Countries } from 'components/organisms/countries';
-import { World } from 'components/organisms/world';
-export const Home = () => {
-    const { processor, densePadding } = useContext(Context);
-    if (!processor.model || !processor.model.length) {
-        return React.createElement(Layout, null);
-    }
-    return (React.createElement(Layout, null,
-        React.createElement(React.Fragment, null,
-            React.createElement(World, { processor: processor }),
-            React.createElement(Countries, { processor: processor, densePadding: densePadding }))));
-};
-Home.displayName = 'Home';
-export default Home;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaG9tZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3NyYy9zY3JpcHQvY29tcG9uZW50cy9wYWdlcy9ob21lL2hvbWUudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sS0FBSyxFQUFFLEVBQXFCLFVBQVUsRUFBRSxNQUFNLE9BQU8sQ0FBQztBQUU3RCxPQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sU0FBUyxDQUFDO0FBRWxDLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSw4QkFBOEIsQ0FBQztBQUN0RCxPQUFPLEVBQUUsU0FBUyxFQUFFLE1BQU0sZ0NBQWdDLENBQUM7QUFDM0QsT0FBTyxFQUFFLEtBQUssRUFBRSxNQUFNLDRCQUE0QixDQUFDO0FBRW5ELE1BQU0sQ0FBQyxNQUFNLElBQUksR0FBc0IsR0FBRyxFQUFFO0lBQzFDLE1BQU0sRUFBRSxTQUFTLEVBQUUsWUFBWSxFQUFFLEdBQUcsVUFBVSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRXhELElBQUksQ0FBQyxTQUFTLENBQUMsS0FBSyxJQUFJLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxNQUFNLEVBQUU7UUFDL0MsT0FBTyxvQkFBQyxNQUFNLE9BQUcsQ0FBQztLQUNuQjtJQUVELE9BQU8sQ0FDTCxvQkFBQyxNQUFNO1FBQ0w7WUFDRSxvQkFBQyxLQUFLLElBQUMsU0FBUyxFQUFFLFNBQVMsR0FBSTtZQUMvQixvQkFBQyxTQUFTLElBQUMsU0FBUyxFQUFFLFNBQVMsRUFBRSxZQUFZLEVBQUUsWUFBWSxHQUFJLENBQzlELENBQ0ksQ0FDVixDQUFDO0FBQ0osQ0FBQyxDQUFDO0FBRUYsSUFBSSxDQUFDLFdBQVcsR0FBRyxNQUFNLENBQUM7QUFFMUIsZUFBZSxJQUFJLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHsgRnVuY3Rpb25Db21wb25lbnQsIHVzZUNvbnRleHQgfSBmcm9tICdyZWFjdCc7XG5cbmltcG9ydCB7IENvbnRleHQgfSBmcm9tICdjb250ZXh0JztcblxuaW1wb3J0IHsgTGF5b3V0IH0gZnJvbSAnY29tcG9uZW50cy90ZW1wbGF0ZXMvZGVmYXVsdCc7XG5pbXBvcnQgeyBDb3VudHJpZXMgfSBmcm9tICdjb21wb25lbnRzL29yZ2FuaXNtcy9jb3VudHJpZXMnO1xuaW1wb3J0IHsgV29ybGQgfSBmcm9tICdjb21wb25lbnRzL29yZ2FuaXNtcy93b3JsZCc7XG5cbmV4cG9ydCBjb25zdCBIb21lOiBGdW5jdGlvbkNvbXBvbmVudCA9ICgpID0+IHtcbiAgY29uc3QgeyBwcm9jZXNzb3IsIGRlbnNlUGFkZGluZyB9ID0gdXNlQ29udGV4dChDb250ZXh0KTtcblxuICBpZiAoIXByb2Nlc3Nvci5tb2RlbCB8fCAhcHJvY2Vzc29yLm1vZGVsLmxlbmd0aCkge1xuICAgIHJldHVybiA8TGF5b3V0IC8+O1xuICB9XG5cbiAgcmV0dXJuIChcbiAgICA8TGF5b3V0PlxuICAgICAgPD5cbiAgICAgICAgPFdvcmxkIHByb2Nlc3Nvcj17cHJvY2Vzc29yfSAvPlxuICAgICAgICA8Q291bnRyaWVzIHByb2Nlc3Nvcj17cHJvY2Vzc29yfSBkZW5zZVBhZGRpbmc9e2RlbnNlUGFkZGluZ30gLz5cbiAgICAgIDwvPlxuICAgIDwvTGF5b3V0PlxuICApO1xufTtcblxuSG9tZS5kaXNwbGF5TmFtZSA9ICdIb21lJztcblxuZXhwb3J0IGRlZmF1bHQgSG9tZTtcbiJdfQ==
+import React,{useContext}from"react";import{Context}from"context";import{Layout}from"components/templates/default";import{Countries}from"components/organisms/countries";import{World}from"components/organisms/world";export const Home=()=>{const{processor,densePadding}=useContext(Context);return processor.model&&processor.model.length?React.createElement(Layout,null,React.createElement(React.Fragment,null,React.createElement(World,{processor}),React.createElement(Countries,{processor,densePadding}))):React.createElement(Layout,null)};Home.displayName="Home";export default Home;

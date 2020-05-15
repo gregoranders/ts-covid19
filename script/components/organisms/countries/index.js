@@ -1,4 +1,1 @@
-import { Countries } from "./countries.js";
-export * from "./countries.js";
-export default Countries;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvc2NyaXB0L2NvbXBvbmVudHMvb3JnYW5pc21zL2NvdW50cmllcy9pbmRleC50c3giXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFNBQVMsRUFBRSx1QkFBb0I7QUFFeEMsK0JBQTRCO0FBRTVCLGVBQWUsU0FBUyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ291bnRyaWVzIH0gZnJvbSAnLi9jb3VudHJpZXMnO1xuXG5leHBvcnQgKiBmcm9tICcuL2NvdW50cmllcyc7XG5cbmV4cG9ydCBkZWZhdWx0IENvdW50cmllcztcbiJdfQ==
+import{Countries}from"./countries.js";export*from"./countries.js";export default Countries;
