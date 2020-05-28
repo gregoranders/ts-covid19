@@ -1,0 +1,60 @@
+{
+  "imports": {
+    "clsx": "/ts-covid19/vendor/clsx.js",
+    "idb": "/ts-covid19/vendor/idb.js",
+
+    "object-assign": "/ts-covid19/vendor/object-assign.js",
+    "scheduler": "/ts-covid19/vendor/scheduler.js",
+    "react": "/ts-covid19/vendor/react.js",
+    "react-is": "/ts-covid19/vendor/react-is.js",
+    "react-dom": "/ts-covid19/vendor/react-dom.js",
+    "react-router": "/ts-covid19/vendor/react-router.js",
+    "react-router-dom": "/ts-covid19/vendor/react-router-dom.js",
+    "react-transition-group": "/ts-covid19/vendor/react-transition-group.js",
+    "react-virtualized": "/ts-covid19/vendor/react-virtualized.js",
+    "react-smooth": "/ts-covid19/vendor/react-smooth.js",
+    "recharts": "/ts-covid19/vendor/recharts.js",
+    "recharts-scale": "/ts-covid19/vendor/recharts-scale.js",
+    "prop-types": "/ts-covid19/vendor/prop-types.js",
+    "recoil": "/ts-covid19/vendor/recoil.production.js",
+
+    "d3-array": "/ts-covid19/vendor/d3-array.js",
+    "d3-color": "/ts-covid19/vendor/d3-color.js",
+    "d3-format": "/ts-covid19/vendor/d3-format.js",
+    "d3-interpolate": "/ts-covid19/vendor/d3-interpolate.js",
+    "d3-path": "/ts-covid19/vendor/d3-path.js",
+    "d3-scale": "/ts-covid19/vendor/d3-scale.js",
+    "d3-shape": "/ts-covid19/vendor/d3-shape.js",
+    "d3-time": "/ts-covid19/vendor/d3-time.js",
+    "d3-time-format": "/ts-covid19/vendor/d3-time-format.js",
+
+    "@fortawesome/fontawesome-svg-core": "/ts-covid19/vendor/@fortawesome/fontawesome-svg-core.js",
+    "@fortawesome/free-regular-svg-icons": "/ts-covid19/vendor/@fortawesome/free-regular-svg-icons.js",
+    "@fortawesome/free-solid-svg-icons": "/ts-covid19/vendor/@fortawesome/free-solid-svg-icons.js",
+    "@fortawesome/free-brands-svg-icons": "/ts-covid19/vendor/@fortawesome/free-brands-svg-icons.js",
+
+    "registerServiceWorker": "/ts-covid19/script/registerServiceWorker.js",
+
+    "index": "/ts-covid19/script/index.js",
+    "loading": "/ts-covid19/script/loading.js",
+    "routes": "/ts-covid19/script/routes.js",
+    "application": "/ts-covid19/script/application.js",
+    "context": "/ts-covid19/script/context.js",
+    "state": "/ts-covid19/script/state.js",
+
+    "components/layout": "/ts-covid19/script/components/layout/index.js",
+
+    "components/atoms/lorem": "/ts-covid19/script/components/atoms/lorem/index.js",
+    "components/atoms/input": "/ts-covid19/script/components/atoms/input/index.js",
+    "components/atoms/counter": "/ts-covid19/script/components/atoms/counter/index.js",
+
+    "components/organisms/header": "/ts-covid19/script/components/organisms/header/index.js",
+    "components/organisms/main": "/ts-covid19/script/components/organisms/main/index.js",
+    "components/organisms/footer": "/ts-covid19/script/components/organisms/footer/index.js",
+
+    "components/molecules/navigation": "/ts-covid19/script/components/molecules/navigation/index.js",
+
+    "components/pages/about": "/ts-covid19/script/components/pages/about/index.js",
+    "components/pages/home": "/ts-covid19/script/components/pages/home/index.js"
+  }
+}

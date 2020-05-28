@@ -14,82 +14,113 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="application-name" content="Covid-19 Dashboard in TypeScript" />
-    <link rel="manifest" href="./manifest.json" />
-    <link rel="shortcut icon" href="./favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="./favicon/favicon-48x48.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="./favicon/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="./favicon/apple-touch-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="./favicon/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="./favicon/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="./favicon/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="./favicon/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="./favicon/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="./favicon/apple-touch-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="167x167" href="./favicon/apple-touch-icon-167x167.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon-180x180.png" />
-    <link rel="apple-touch-icon" sizes="1024x1024" href="./favicon/apple-touch-icon-1024x1024.png" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto+Slab|Roboto:300,400,500,700,800,900&display=swap"
-    />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <script defer type="module" src="./es-module-shims.js"></script>
-    <script type="importmap-shim" src="./es-modules-shims.json"></script>
-    <base href="/ts-covid19/" />
-    <style>
-      body {
-        height: 99vh;
-      }
-    </style>
-    <!--
+    <link rel="manifest" href="/ts-covid19/manifest.json" />
+    <link rel="shortcut icon" href="/ts-covid19/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/ts-covid19/favicon/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/ts-covid19/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/ts-covid19/favicon/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/ts-covid19/favicon/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/ts-covid19/favicon/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/ts-covid19/favicon/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/ts-covid19/favicon/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/ts-covid19/favicon/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/ts-covid19/favicon/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/ts-covid19/favicon/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/ts-covid19/favicon/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="167x167" href="/ts-covid19/favicon/apple-touch-icon-167x167.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/ts-covid19/favicon/apple-touch-icon-180x180.png" />
+    <link rel="apple-touch-icon" sizes="1024x1024" href="/ts-covid19/favicon/apple-touch-icon-1024x1024.png" />
+    <!-- <script defer src="/ts-covid19/vendor/es-module-shims.js"></script> -->
     <script type="importmap">
       {
         "imports": {
-          "react": "./vendor/react/react.js",
-          "clsx": "./vendor/clsx/clsx.js",
-          "react-dom": "./vendor/react-dom/react-dom.js",
-          "react-router": "./vendor/react-router/react-router.js",
-          "react-router-dom": "./vendor/react-router-dom/react-router-dom.js",
-          "react-is": "./vendor/react-is/react-is.js",
-          "recharts": "./vendor/recharts/recharts.js",
-          "prop-types": "./vendor/prop-types/prop-types.js",
-          "@material-ui/core": "./vendor/@material-ui/core.js",
-          "@material-ui/icons": "./vendor/@material-ui/icons.js",
-          "@material-ui/styles": "./vendor/@material-ui/styles.js",
-          "react-virtualized": "./vendor/react-virtualized/react-virtualized.js",
-          "index": "./script/index.js",
-          "application": "./script/application.js",
-          "context": "./script/context.js",
-          "registerServiceWorker": "./script/registerServiceWorker.js",
-          "model": "./script/model/index.js",
-          "routes": "./script/routes.js",
-          "versions": "./script/versions.js",
-          "components/molecules/navigation": "./script/components/molecules/navigation/index.js",
-          "components/organisms/header": "./script/components/organisms/header/index.js",
-          "components/organisms/main": "./script/components/organisms/main/index.js",
-          "components/organisms/footer": "./script/components/organisms/footer/index.js",
-          "components/organisms/countries": "./script/components/organisms/countries/index.js",
-          "components/organisms/world": "./script/components/organisms/world/index.js",
-          "components/templates/default": "./script/components/templates/default/index.js",
-          "components/pages/home": "./script/components/pages/home/index.js",
-          "components/pages/about": "./script/components/pages/about/index.js"
+          "clsx": "/ts-covid19/vendor/clsx.js",
+          "idb": "/ts-covid19/vendor/idb.js",
+
+          "object-assign": "/ts-covid19/vendor/object-assign.js",
+          "prop-types": "/ts-covid19/vendor/prop-types.js",
+          "react": "/ts-covid19/vendor/react.js",
+          "react-is": "/ts-covid19/vendor/react-is.js",
+          "react-dom": "/ts-covid19/vendor/react-dom.js",
+          "react-router": "/ts-covid19/vendor/react-router.js",
+          "react-router-dom": "/ts-covid19/vendor/react-router-dom.js",
+          "react-transition-group": "/ts-covid19/vendor/react-transition-group.js",
+          "react-virtualized": "/ts-covid19/vendor/react-virtualized.js",
+          "react-smooth": "/ts-covid19/vendor/react-smooth.js",
+          "recoil": "/ts-covid19/vendor/recoil.js",
+          "recharts": "/ts-covid19/vendor/recharts.js",
+          "recharts-scale": "/ts-covid19/vendor/recharts-scale.js",
+          "scheduler": "/ts-covid19/vendor/scheduler.js",
+
+          "d3-array": "/ts-covid19/vendor/d3-array.js",
+          "d3-color": "/ts-covid19/vendor/d3-color.js",
+          "d3-format": "/ts-covid19/vendor/d3-format.js",
+          "d3-interpolate": "/ts-covid19/vendor/d3-interpolate.js",
+          "d3-path": "/ts-covid19/vendor/d3-path.js",
+          "d3-scale": "/ts-covid19/vendor/d3-scale.js",
+          "d3-shape": "/ts-covid19/vendor/d3-shape.js",
+          "d3-time": "/ts-covid19/vendor/d3-time.js",
+          "d3-time-format": "/ts-covid19/vendor/d3-time-format.js",
+
+          "@fortawesome/fontawesome-svg-core": "/ts-covid19/vendor/@fortawesome/fontawesome-svg-core.js",
+          "@fortawesome/free-regular-svg-icons": "/ts-covid19/vendor/@fortawesome/free-regular-svg-icons.js",
+          "@fortawesome/free-solid-svg-icons": "/ts-covid19/vendor/@fortawesome/free-solid-svg-icons.js",
+          "@fortawesome/free-brands-svg-icons": "/ts-covid19/vendor/@fortawesome/free-brands-svg-icons.js",
+
+          "registerServiceWorker": "/ts-covid19/script/registerServiceWorker.js",
+
+          "index": "/ts-covid19/script/index.js",
+          "loading": "/ts-covid19/script/loading.js",
+          "routes": "/ts-covid19/script/routes.js",
+          "application": "/ts-covid19/script/application.js",
+          "context": "/ts-covid19/script/context.js",
+
+          "states/model": "/ts-covid19/script/states/model/index.js",
+          "states/model/model": "/ts-covid19/script/states/model/model.js",
+          "states/model/collector": "/ts-covid19/script/states/model/collector.js",
+          "states/model/processor": "/ts-covid19/script/states/model/processor.js",
+          "states/model/sorter": "/ts-covid19/script/states/model/sorter.js",
+
+          "components/layout": "/ts-covid19/script/components/layout/index.js",
+
+          "components/organisms/countries": "/ts-covid19/script/components/organisms/countries/index.js",
+          "components/organisms/series": "/ts-covid19/script/components/organisms/series/index.js",
+
+          "components/molecules/plot": "/ts-covid19/script/components/molecules/plot/index.js",
+
+          "components/pages/world": "/ts-covid19/script/components/pages/world/index.js",
+          "components/pages/country": "/ts-covid19/script/components/pages/country/index.js"
         }
       }
     </script>
-    -->
+    <link rel="canonical" href="/ts-covid19/"/>
+    <link rel="modulepreload" href="/ts-covid19/vendor/clsx.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/object-assign.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/scheduler.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/react.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/react-is.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/react-dom.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/react-router.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/react-router-dom.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/react-transition-group.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/recoil.js">
+    <link rel="modulepreload" href="/ts-covid19/vendor/prop-types.js">
+    <link rel="stylesheet" href="/ts-covid19/styles.css" />
+    <base href="/ts-covid19/" />
     <title>ts-covid19 - Covid-19 Dashboard in TypeScript</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="app">
-      <script type="module-shim">
-        import "index";
-      </script>
-      <!-- <script defer type="module">
-        import 'index';
-      </script> -->
+    <div class="centered loading">
+      <h1>Please ensure your browser supports ES module loading</h1>
     </div>
+    <script defer type="module">
+      import { bootstrap } from 'index';
+      setTimeout(() => {
+        bootstrap().then(() => {
+          /* */
+        }).catch(console.error);
+      }, 1);
+    </script>
   </body>
 </html>

@@ -1,1 +1,19 @@
-import React from"react";import{ModelProcessor}from"model";let covidWorker=()=>{};import("worker").then(temp=>{covidWorker=temp.default});export const webWorker=()=>{const code=covidWorker.toString(),blob=new Blob(["("+code+")()"]);return new Worker(URL.createObjectURL(blob))||null};export var Theme;!function(Theme){Theme.LIGHT="light",Theme.DARK="dark"}(Theme||(Theme={}));export const ctx={theme:Theme.DARK,densePadding:!0,toggleTheme:()=>{switch(ctx.theme){case Theme.DARK:ctx.theme=Theme.LIGHT;break;default:case Theme.LIGHT:ctx.theme=Theme.DARK}},toggleDensePadding:()=>{ctx.densePadding,ctx.densePadding},processor:new ModelProcessor([]),updating:!1,updateModel:()=>{const worker=webWorker();ctx.updating||(worker.onmessage=e=>{ctx.processor=new ModelProcessor(e.data),ctx.updating=!1},worker.postMessage(ctx.updating),ctx.updating=!0)}};export const Context=React.createContext(ctx);export default Context;
+import React, { createContext, memo, useState } from 'react';
+import { string as IsString } from 'prop-types';
+const defaultContext = {
+    basename: '/',
+};
+export const Context = createContext(defaultContext);
+export const ContextProvider = ({ basename, children }) => {
+    const state = useState({
+        context: {
+            basename: basename,
+        },
+    })[0];
+    return React.createElement(Context.Provider, { value: state.context }, children);
+};
+ContextProvider.displayName = 'ContextProvider';
+ContextProvider.propTypes = {
+    basename: IsString.isRequired,
+};
+export default memo(ContextProvider);
