@@ -1,1 +1,36 @@
-import e,{memo as o,useEffect as j,useState as v}from"react";import{number as q}from"prop-types";export const Spinner=({timeout:t})=>{const[r,n]=v(0),[s,a]=v(1),o=()=>{-1===s&&1===r&&a(1),1===s&&4===r&&a(-1),n(r+s)};j(()=>{const e=setInterval(o,t);return()=>{clearInterval(e)}});let p="";for(let e=0;e<r;e++)p+="&middot;";return e.createElement("div",{className:"centered spinner"},e.createElement("div",null,e.createElement("h1",{className:"dots",dangerouslySetInnerHTML:{__html:p}})))};Spinner.displayName="Spinner",Spinner.defaultProps={timeout:300},Spinner.propTypes={timeout:q.isRequired};export default o(Spinner);
+import React, { memo, useEffect, useState } from 'react';
+import { number as IsNumber } from 'prop-types';
+export const Spinner = ({ timeout }) => {
+    const [stage, setStage] = useState(0);
+    const [mode, setMode] = useState(1);
+    const processStage = () => {
+        if (mode === -1 && stage === 1) {
+            setMode(1);
+        }
+        if (mode === 1 && stage === 4) {
+            setMode(-1);
+        }
+        setStage(stage + mode);
+    };
+    useEffect(() => {
+        const handle = setInterval(processStage, timeout);
+        return () => {
+            clearInterval(handle);
+        };
+    });
+    let dots = '';
+    for (let idx = 0; idx < stage; idx++) {
+        dots += '&middot;';
+    }
+    return (React.createElement("div", { className: "centered spinner" },
+        React.createElement("div", null,
+            React.createElement("h1", { className: "dots", dangerouslySetInnerHTML: { __html: dots } }))));
+};
+Spinner.displayName = 'Spinner';
+Spinner.defaultProps = {
+    timeout: 300,
+};
+Spinner.propTypes = {
+    timeout: IsNumber.isRequired,
+};
+export default memo(Spinner);

@@ -1,1 +1,598 @@
-var ie;!function(e){const t=new URL(location.toString()).searchParams.get("base")||"/";new((()=>{class t{constructor(e=self,t="/",s=[]){this.service=e,this.base=t,this.cacheUrls=s,e.customServiceWorker=this}register(){if(!this.service)throw new Error("Invalid service [ServiceWorkerGlobalScope]");this.service.onsync=this.onSync.bind(this),this.service.onactivate=this.onActivate.bind(this),this.service.onfetch=this.onFetch.bind(this),this.service.oninstall=this.onInstall.bind(this),this.service.onmessage=this.onMessage.bind(this)}onInstall(e){e.waitUntil(new Promise(e=>{this.initializeCache().then(()=>{e(this.service.skipWaiting())})}))}async onActivate(e){e.waitUntil(new Promise(e=>{this.flushCache().then(()=>{e(this.service.skipWaiting())})}))}onFetch(e){"only-if-cached"===e.request.cache&&"same-origin"!==e.request.mode||e.respondWith(caches.match(e.request).then(t=>t||this.service.fetch(e.request,{credentials:"same-origin"}).then(t=>{if(!t||200!==t.status||"basic"!==t.type)return t;const s=t.clone();return caches.open(this.cacheId("fetch")).then(t=>{t.put(e.request,s)}).catch(e=>{throw e}),t})))}onMessage(s){if(this.log("message",s),s&&s.data&&s.data.type)switch(s.data.type){case"GET_VERSION":s.ports[0].postMessage(t.version);break;case"CONTENT_CACHED":this.service.clients.matchAll().then(e=>{e.forEach(e=>{e.postMessage("CONTENT_CACHED")})});break;case"CONTENT_UPDATED":this.service.clients.matchAll().then(e=>{e.forEach(e=>{e.postMessage("CONTENT_UPDATED")})});break;case"CLIENTS_CLAIM":this.service.clients.claim();break;case"SKIP_WAITING":this.service.skipWaiting();break;case"REDUNDANT":this.log("REDUNDANT");break;case"GET_MODELS":(new e.ModelCollector).collect().then(t=>{const a=new e.ModelProcessor(t);s.ports[0].postMessage(a.model)})}else this.log("message raw",s)}async onSync(t){switch(t.tag){case"UPDATE_MODEL":const t=new e.ModelCollector,s=await t.collect(),a=new e.ModelProcessor(s).model;this.service.clients.matchAll().then(e=>{e.forEach(e=>{e.postMessage(a)})})}}log(...e){console.log(`%c${t.id}-${t.version}`,["background: #000080","border-radius: 0.5em","color: white","font-weight: bold","padding: 2px 0.em"].join(";"),e)}cacheId(e){return`${e}-${t.version}`}initializeCache(){return new Promise((e,t)=>{caches.open(this.cacheId("install")).then(e=>e.addAll(this.cacheUrls.map(e=>`${this.base}${e}`))).then(e).catch(t)})}flushCache(){const e=[this.cacheId("install"),this.cacheId("fetch"),this.cacheId("data")];return new Promise((t,s)=>{caches.keys().then(s=>{t(Promise.all(s.map(t=>-1===e.indexOf(t)?caches.delete(t):Promise.resolve(!0))))}).catch(s)})}}return t.id="ServiceWorker",t.version="0.0.2",t})())(self,t,[]).register()}(ie||(ie={})),function(e){const t={undefined:!1,fieldSeparator:",",lineSeparator:"\n",quote:'"'},s=(e,t)=>{if(!t.undefined||e.length)return e},a=(e,t,s)=>{t.push(e),s.field++,s.fieldOffset=-1,s.appendField=!1},r=(e,t,s)=>{t.push(e),s.field=0,s.line++,s.lineOffset=-1,s.appendRow=!1},i=(e,i=t)=>new Promise(o=>{((e,i=t)=>{const o=Object.assign({},t,i),c={field:0,fieldOffset:0,line:0,lineOffset:0,quoted:!1,appendCell:!1,appendField:!1,appendRow:!1};return new Promise((t,i)=>{if(e.length){const n=[];let l=[],h="";for(let t=0;t<e.length;t++)c.appendCell=!0,e[t]===o.quote?t&&"\\"!==e[t-1]?(!h.length||c.quoted?c.quoted=!c.quoted:i(Error(`Invalid CSV text at offset ${c.line}:${c.lineOffset}`)),c.appendCell=!1):h=h.substr(0,h.length-1):e[t]===o.fieldSeparator?c.quoted||(c.appendCell=!1,c.appendField=!0):e[t]===o.lineSeparator&&(c.quoted||(c.appendCell=!1,c.appendField=!0,c.appendRow=!0)),c.appendCell&&(h+=e[t]),c.appendField&&(a(s(h,o),l,c),h=""),c.appendRow&&(r(l,n,c),l=[]),c.lineOffset++,c.fieldOffset++;l.length&&(a(s(h,o),l,c),r(l,n,c)),t(n)}else i(Error("Empty CSV text"))})})(e,i).then(e=>{const t=e[0].filter(e=>"string"==typeof e);o(e.filter((e,t)=>t>0).map(e=>{const s={};return t.forEach((t,a)=>{s[t]=e[a]}),s}))})});class o{map(e){return e.map(e=>this._map(e)).sort((e,t)=>{const s=e.country.localeCompare(t.country);return 0===s?e.state.localeCompare(t.state):s})}_map(e){const t={values:[]};return Object.keys(e).forEach(s=>{if(s.match(/State/))t.state=e[s];else if(s.match(/Country/))t.country=e[s].replace(/\*/,"");else if(s.match(/Lat/))t.lat=parseFloat(e[s]);else if(s.match(/Long/))t.lon=parseFloat(e[s]);else{const a=parseInt(e[s],10),r=new Date(s),i=Date.UTC(r.getFullYear(),r.getMonth(),r.getDate());t.values.push({timestamp:i,value:a})}}),t.values.sort((e,t)=>e.timestamp-t.timestamp),Object.freeze(t)}}class c{map(e){return e.map(e=>this._map(e)).sort((e,t)=>{const s=e.country.localeCompare(t.country);return 0===s?e.state.localeCompare(t.state):s})}_map(e){const t={};return Object.keys(e).forEach(s=>{s.match(/State/)?t.state=e[s]:s.match(/Country/)?t.country=e[s].replace(/\*/,""):s.match(/Lat/)?t.lat=parseFloat(e[s]):s.match(/Long/)?t.lon=parseFloat(e[s]):s.match(/Population/)?t.population=parseInt(e[s]):s.match(/UID/)?t.uid=parseInt(e[s]):s.match(/iso2/)?t.iso2=e[s]:s.match(/iso3/)?t.iso3=e[s]:s.match(/code3/)?t.code3=parseInt(e[s]):s.match(/FIPS/)?t.fips=parseInt(e[s]):s.match(/Admin2/)&&(t.admin2=e[s])}),Object.freeze(t)}}let n;!function(e){e.CONFIRMED="confirmed",e.DEATHS="deaths",e.RECOVERED="recovered",e.LOOKUP="lookup"}(n||(n={})),e.ModelCollector=class{constructor(e=new o,t=new c){this._modelMapper=e,this._lookupMapper=t}async collect(){const e=await this._fetchLookup(),t=await this._fetchModel(n.CONFIRMED),s=await this._fetchModel(n.DEATHS),a=await this._fetchModel(n.RECOVERED);return this.merge(t,s,a,e)}findSeries(e,t){const s=t.find(t=>t.timestamp===e);return s?s.value:0}async merge(e,t,s,a){return new Promise(r=>{r(e.filter(e=>"Canada"!==e.country||"Recovered"!==e.state).map(e=>{const r=a.find(t=>{let s=t.country.localeCompare(e.country);return 0===s&&(s=t.state.localeCompare(e.state)),0===s}),i=t.find(t=>t.country===e.country&&t.state===e.state),o=s.find(t=>t.country===e.country&&t.state===e.state),c=e.values.map(e=>Object.freeze({confirmed:e.value,deaths:this.findSeries(e.timestamp,i?i.values:[]),recovered:this.findSeries(e.timestamp,o?o.values:[]),timestamp:e.timestamp}));return Object.freeze({country:e.country,lat:e.lat,lon:e.lon,state:e.state,population:r&&r.population||0,values:Object.freeze(c)})}))})}async _fetchModel(e){return this._fetch(e).then(e=>i(e)).then(e=>this._modelMapper.map(e))}async _fetchLookup(){return this._fetch(n.LOOKUP).then(e=>i(e)).then(e=>this._lookupMapper.map(e))}async _fetch(e){const t=new Request(this._fetchUrl(e),{headers:this._fetchHeaders(),method:"GET"});return(await fetch(t)).text()}_fetchHeaders(){return{"Accept-Encoding":"gzip, deflate, br"}}_fetchUrl(e){return e===n.LOOKUP?"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/UID_ISO_FIPS_LookUp_Table.csv":`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_${e}_global.csv`}},e.ModelProcessor=class{constructor(e){this._model=[],e&&e.length&&(this._model=this.process(e))}get model(){return this._model}process(e){return e.map(e=>{const t=e.population?e.population/1e5:1,s={country:e.country,population:e.population};return e.state&&e.state.length&&(s.state=e.state),s.values=e.values.map((e,s,a)=>{const r={5:this.avrg(5,s,a),7:this.avrg(7,s,a),14:this.avrg(14,s,a),21:this.avrg(21,s,a),28:this.avrg(28,s,a)},i=this.diff(e,s,a),o={confirmed:e.confirmed,dead:e.deaths,recovered:e.recovered,active:this.active(e)};return{...o,diff:i,avrg:r,ratio:{...this.ratio(o,t),diff:this.ratio(i,t),avrg:{5:this.ratio(r[5],t),7:this.ratio(r[7],t),14:this.ratio(r[14],t),21:this.ratio(r[21],t),28:this.ratio(r[28],t)}},timestamp:e.timestamp}}),s})}diff(e,t,s){return t?{confirmed:e.confirmed-s[t-1].confirmed,dead:e.deaths-s[t-1].deaths,recovered:e.recovered-s[t-1].recovered,active:this.active(e)-this.active(s[t-1])}:{confirmed:0,dead:0,recovered:0,active:0}}avrg(e,t,s){if(t){const a={confirmed:0,dead:0,recovered:0,active:0};let r=0;for(let i=t;i>t-e&&i>0;i--){const e=this.diff(s[i],i,s);a.confirmed+=e.confirmed,a.dead+=e.dead,a.recovered+=e.recovered,a.active+=e.active,r++}return r?{confirmed:a.confirmed/r,dead:a.dead/r,recovered:a.recovered/r,active:a.active/r}:a}return{confirmed:s[t].confirmed,dead:s[t].deaths,recovered:s[t].recovered,active:this.active(s[t])}}active(e){return e.confirmed-e.deaths-e.recovered}ratio(e,t){return{confirmed:e.confirmed/t,dead:e.dead/t,recovered:e.recovered/t,active:e.active/t}}}}(ie||(ie={}));
+"use strict";
+var ServiceWorkerModule;
+(function (ServiceWorkerModule) {
+    const baseHref = (() => {
+        const url = new URL(location.toString());
+        return url.searchParams.get('base') || '/';
+    })();
+    let CustomServiceWorker = (() => {
+        class CustomServiceWorker {
+            constructor(service = self, base = '/', cacheUrls = []) {
+                this.service = service;
+                this.base = base;
+                this.cacheUrls = cacheUrls;
+                service.customServiceWorker = this;
+            }
+            register() {
+                if (!this.service) {
+                    throw new Error('Invalid service [ServiceWorkerGlobalScope]');
+                }
+                this.service.onsync = this.onSync.bind(this);
+                this.service.onactivate = this.onActivate.bind(this);
+                this.service.onfetch = this.onFetch.bind(this);
+                this.service.oninstall = this.onInstall.bind(this);
+                this.service.onmessage = this.onMessage.bind(this);
+            }
+            onInstall(event) {
+                event.waitUntil(new Promise((resolve) => {
+                    this.initializeCache().then(() => {
+                        resolve(this.service.skipWaiting());
+                    });
+                }));
+            }
+            async onActivate(event) {
+                event.waitUntil(new Promise((resolve) => {
+                    this.flushCache().then(() => {
+                        resolve(this.service.skipWaiting());
+                    });
+                }));
+            }
+            onFetch(event) {
+                if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+                    return;
+                }
+                event.respondWith(caches.match(event.request).then((response) => {
+                    if (response) {
+                        return response;
+                    }
+                    return this.service.fetch(event.request, { credentials: 'same-origin' }).then((response) => {
+                        if (!response || response.status !== 200 || response.type !== 'basic') {
+                            return response;
+                        }
+                        const responseToCache = response.clone();
+                        caches
+                            .open(this.cacheId('fetch'))
+                            .then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        })
+                            .catch((error) => {
+                            throw error;
+                        });
+                        return response;
+                    });
+                }));
+            }
+            onMessage(event) {
+                if (event && event.data && event.data.type) {
+                    switch (event.data.type) {
+                        case 'GET_VERSION':
+                            event.ports[0].postMessage(CustomServiceWorker.version);
+                            break;
+                        case 'CONTENT_CACHED':
+                            this.service.clients.matchAll().then((clients) => {
+                                clients.forEach((client) => {
+                                    client.postMessage('CONTENT_CACHED');
+                                });
+                            });
+                            break;
+                        case 'CONTENT_UPDATED':
+                            this.service.clients.matchAll().then((clients) => {
+                                clients.forEach((client) => {
+                                    client.postMessage('CONTENT_UPDATED');
+                                });
+                            });
+                            break;
+                        case 'CLIENTS_CLAIM':
+                            this.service.clients.claim();
+                            break;
+                        case 'SKIP_WAITING':
+                            this.service.skipWaiting();
+                            break;
+                        case 'GET_MODELS':
+                            const collector = new ServiceWorkerModule.ModelCollector();
+                            collector.collect().then((data) => {
+                                const processor = new ServiceWorkerModule.ModelProcessor(data);
+                                event.ports[0].postMessage(processor.model);
+                            });
+                            break;
+                    }
+                }
+                else {
+                    this.log('message raw', event);
+                }
+            }
+            async onSync(event) {
+                switch (event.tag) {
+                    case 'UPDATE_MODEL':
+                        const collector = new ServiceWorkerModule.ModelCollector();
+                        const data = await collector.collect();
+                        const processor = new ServiceWorkerModule.ModelProcessor(data);
+                        const models = processor.model;
+                        this.service.clients.matchAll().then((clients) => {
+                            clients.forEach((client) => {
+                                client.postMessage(models);
+                            });
+                        });
+                }
+            }
+            log(...parameters) {
+                const styles = [
+                    `background: #000080`,
+                    `border-radius: 0.5em`,
+                    `color: white`,
+                    `font-weight: bold`,
+                    `padding: 2px 0.em`,
+                ];
+                console.log(...[`%c${CustomServiceWorker.id}-${CustomServiceWorker.version}`, styles.join(';')], parameters);
+            }
+            cacheId(id) {
+                return `${id}-${CustomServiceWorker.version}`;
+            }
+            initializeCache() {
+                return new Promise((resolve, reject) => {
+                    caches
+                        .open(this.cacheId('install'))
+                        .then((cache) => {
+                        return cache.addAll(this.cacheUrls.map((url) => {
+                            return `${this.base}${url}`;
+                        }));
+                    })
+                        .then(resolve)
+                        .catch(reject);
+                });
+            }
+            flushCache() {
+                const cacheWhitelist = [this.cacheId('install'), this.cacheId('fetch'), this.cacheId('data')];
+                return new Promise((resolve, reject) => {
+                    caches
+                        .keys()
+                        .then((cacheNames) => {
+                        resolve(Promise.all(cacheNames.map((cacheName) => {
+                            if (cacheWhitelist.indexOf(cacheName) === -1) {
+                                return caches.delete(cacheName);
+                            }
+                            return Promise.resolve(true);
+                        })));
+                    })
+                        .catch(reject);
+                });
+            }
+        }
+        CustomServiceWorker.id = 'ServiceWorker';
+        CustomServiceWorker.version = '0.0.2';
+        return CustomServiceWorker;
+    })();
+    const serviceWorker = new CustomServiceWorker(self, baseHref, []);
+    serviceWorker.register();
+})(ServiceWorkerModule || (ServiceWorkerModule = {}));
+var ServiceWorkerModule;
+(function (ServiceWorkerModule) {
+    const DefaultConfiguration = {
+        undefined: false,
+        fieldSeparator: ',',
+        lineSeparator: '\n',
+        quote: '"',
+    };
+    const fieldValue = (cell, options) => {
+        if (options.undefined && !cell.length) {
+            return undefined;
+        }
+        return cell;
+    };
+    const addField = (field, row, state) => {
+        row.push(field);
+        state.field++;
+        state.fieldOffset = -1;
+        state.appendField = false;
+    };
+    const addRow = (row, rows, state) => {
+        rows.push(row);
+        state.field = 0;
+        state.line++;
+        state.lineOffset = -1;
+        state.appendRow = false;
+    };
+    const csv = (text, configuration = DefaultConfiguration) => {
+        const options = Object.assign({}, DefaultConfiguration, configuration);
+        const state = {
+            field: 0,
+            fieldOffset: 0,
+            line: 0,
+            lineOffset: 0,
+            quoted: false,
+            appendCell: false,
+            appendField: false,
+            appendRow: false,
+        };
+        return new Promise((resolve, reject) => {
+            if (!text.length) {
+                reject(Error('Empty CSV text'));
+            }
+            else {
+                const rows = [];
+                let row = [];
+                let cell = '';
+                for (let idx = 0; idx < text.length; idx++) {
+                    state.appendCell = true;
+                    if (text[idx] === options.quote) {
+                        if (idx && text[idx - 1] !== '\\') {
+                            if (!cell.length || state.quoted) {
+                                state.quoted = !state.quoted;
+                            }
+                            else {
+                                reject(Error(`Invalid CSV text at offset ${state.line}:${state.lineOffset}`));
+                            }
+                            state.appendCell = false;
+                        }
+                        else {
+                            cell = cell.substr(0, cell.length - 1);
+                        }
+                    }
+                    else if (text[idx] === options.fieldSeparator) {
+                        if (!state.quoted) {
+                            state.appendCell = false;
+                            state.appendField = true;
+                        }
+                    }
+                    else if (text[idx] === options.lineSeparator) {
+                        if (!state.quoted) {
+                            state.appendCell = false;
+                            state.appendField = true;
+                            state.appendRow = true;
+                        }
+                    }
+                    if (state.appendCell) {
+                        cell += text[idx];
+                    }
+                    if (state.appendField) {
+                        addField(fieldValue(cell, options), row, state);
+                        cell = '';
+                    }
+                    if (state.appendRow) {
+                        addRow(row, rows, state);
+                        row = [];
+                    }
+                    state.lineOffset++;
+                    state.fieldOffset++;
+                }
+                if (row.length) {
+                    addField(fieldValue(cell, options), row, state);
+                    addRow(row, rows, state);
+                }
+                resolve(rows);
+            }
+        });
+    };
+    const csv2json = (text, configuration = DefaultConfiguration) => {
+        return new Promise((resolve) => {
+            csv(text, configuration).then((rows) => {
+                const keys = rows[0].filter((field) => typeof field === 'string');
+                resolve(rows
+                    .filter((row, idx) => idx > 0)
+                    .map((row) => {
+                    const obj = {};
+                    keys.forEach((key, keyIdx) => {
+                        obj[key] = row[keyIdx];
+                    });
+                    return obj;
+                }));
+            });
+        });
+    };
+    class ModelMapper {
+        map(rows) {
+            return rows
+                .map((row) => this._map(row))
+                .sort((a, b) => {
+                const diff = a.country.localeCompare(b.country);
+                return diff === 0 ? a.state.localeCompare(b.state) : diff;
+            });
+        }
+        _map(row) {
+            const temp = {
+                values: [],
+            };
+            Object.keys(row).forEach((key) => {
+                if (key.match(/State/)) {
+                    temp.state = row[key];
+                }
+                else if (key.match(/Country/)) {
+                    temp.country = row[key].replace(/\*/, '');
+                }
+                else if (key.match(/Lat/)) {
+                    temp.lat = parseFloat(row[key]);
+                }
+                else if (key.match(/Long/)) {
+                    temp.lon = parseFloat(row[key]);
+                }
+                else {
+                    const value = parseInt(row[key], 10);
+                    const date = new Date(key);
+                    const timestamp = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+                    temp.values.push({ timestamp, value });
+                }
+            });
+            temp.values.sort((a, b) => {
+                return a.timestamp - b.timestamp;
+            });
+            return Object.freeze(temp);
+        }
+    }
+    class LookupMapper {
+        map(rows) {
+            return rows
+                .map((row) => this._map(row))
+                .sort((a, b) => {
+                const diff = a.country.localeCompare(b.country);
+                return diff === 0 ? a.state.localeCompare(b.state) : diff;
+            });
+        }
+        _map(row) {
+            const temp = {};
+            Object.keys(row).forEach((key) => {
+                if (key.match(/State/)) {
+                    temp.state = row[key];
+                }
+                else if (key.match(/Country/)) {
+                    temp.country = row[key].replace(/\*/, '');
+                }
+                else if (key.match(/Lat/)) {
+                    temp.lat = parseFloat(row[key]);
+                }
+                else if (key.match(/Long/)) {
+                    temp.lon = parseFloat(row[key]);
+                }
+                else if (key.match(/Population/)) {
+                    temp.population = parseInt(row[key]);
+                }
+                else if (key.match(/UID/)) {
+                    temp.uid = parseInt(row[key]);
+                }
+                else if (key.match(/iso2/)) {
+                    temp.iso2 = row[key];
+                }
+                else if (key.match(/iso3/)) {
+                    temp.iso3 = row[key];
+                }
+                else if (key.match(/code3/)) {
+                    temp.code3 = parseInt(row[key]);
+                }
+                else if (key.match(/FIPS/)) {
+                    temp.fips = parseInt(row[key]);
+                }
+                else if (key.match(/Admin2/)) {
+                    temp.admin2 = row[key];
+                }
+            });
+            return Object.freeze(temp);
+        }
+    }
+    let Type;
+    (function (Type) {
+        Type["CONFIRMED"] = "confirmed";
+        Type["DEATHS"] = "deaths";
+        Type["RECOVERED"] = "recovered";
+        Type["LOOKUP"] = "lookup";
+    })(Type || (Type = {}));
+    class ModelCollector {
+        constructor(_modelMapper = new ModelMapper(), _lookupMapper = new LookupMapper()) {
+            this._modelMapper = _modelMapper;
+            this._lookupMapper = _lookupMapper;
+        }
+        async collect() {
+            const lookup = await this._fetchLookup();
+            const confirmed = await this._fetchModel(Type.CONFIRMED);
+            const deaths = await this._fetchModel(Type.DEATHS);
+            const resolved = await this._fetchModel(Type.RECOVERED);
+            return this.merge(confirmed, deaths, resolved, lookup);
+        }
+        findSeries(timestamp, series) {
+            const found = series.find((temp) => temp.timestamp === timestamp);
+            if (found) {
+                return found.value;
+            }
+            return 0;
+        }
+        async merge(confirmed, deaths, recovered, lookups) {
+            return new Promise((resolve) => {
+                const models = confirmed
+                    .filter((dummy) => {
+                    if (dummy.country === 'Canada' && dummy.state === 'Recovered') {
+                        return false;
+                    }
+                    return true;
+                })
+                    .map((model) => {
+                    const lookup = lookups.find((dummy) => {
+                        let ret = dummy.country.localeCompare(model.country);
+                        if (ret === 0) {
+                            ret = dummy.state.localeCompare(model.state);
+                        }
+                        return ret === 0 ? true : false;
+                    });
+                    const modelDeaths = deaths.find((dummy) => dummy.country === model.country && dummy.state === model.state);
+                    const modelRecovered = recovered.find((dummy) => dummy.country === model.country && dummy.state === model.state);
+                    const values = model.values.map((value) => {
+                        return Object.freeze({
+                            confirmed: value.value,
+                            deaths: this.findSeries(value.timestamp, modelDeaths ? modelDeaths.values : []),
+                            recovered: this.findSeries(value.timestamp, modelRecovered ? modelRecovered.values : []),
+                            timestamp: value.timestamp,
+                        });
+                    });
+                    return Object.freeze({
+                        country: model.country,
+                        lat: model.lat,
+                        lon: model.lon,
+                        state: model.state,
+                        population: lookup ? lookup.population || 0 : 0,
+                        values: Object.freeze(values),
+                    });
+                });
+                resolve(models);
+            });
+        }
+        async _fetchModel(type) {
+            return this._fetch(type)
+                .then((text) => {
+                return csv2json(text);
+            })
+                .then((models) => {
+                return this._modelMapper.map(models);
+            });
+        }
+        async _fetchLookup() {
+            return this._fetch(Type.LOOKUP)
+                .then((text) => {
+                return csv2json(text);
+            })
+                .then((models) => {
+                return this._lookupMapper.map(models);
+            });
+        }
+        async _fetch(type) {
+            const request = new Request(this._fetchUrl(type), {
+                headers: this._fetchHeaders(),
+                method: 'GET',
+            });
+            const response = await fetch(request);
+            return response.text();
+        }
+        _fetchHeaders() {
+            return {
+                'Accept-Encoding': 'gzip, deflate, br',
+            };
+        }
+        _fetchUrl(type) {
+            const base = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/';
+            if (type === Type.LOOKUP) {
+                return base + 'UID_ISO_FIPS_LookUp_Table.csv';
+            }
+            return base + 'csse_covid_19_time_series' + `/time_series_covid19_${type}_global.csv`;
+        }
+    }
+    ServiceWorkerModule.ModelCollector = ModelCollector;
+    class ModelProcessor {
+        constructor(model) {
+            this._model = [];
+            if (model && model.length) {
+                this._model = this.process(model);
+            }
+        }
+        get model() {
+            return this._model;
+        }
+        process(models) {
+            return models.map((model) => {
+                const factor = model.population ? model.population / 100000 : 1;
+                const mapped = {
+                    country: model.country,
+                    population: model.population,
+                };
+                if (model.state && model.state.length) {
+                    mapped.state = model.state;
+                }
+                mapped.values = model.values.map((value, index, all) => {
+                    const avrg = {
+                        5: this.avrg(5, index, all),
+                        7: this.avrg(7, index, all),
+                        14: this.avrg(14, index, all),
+                        21: this.avrg(21, index, all),
+                        28: this.avrg(28, index, all),
+                    };
+                    const diff = this.diff(value, index, all);
+                    const base = {
+                        confirmed: value.confirmed,
+                        dead: value.deaths,
+                        recovered: value.recovered,
+                        active: this.active(value),
+                    };
+                    return {
+                        ...base,
+                        diff,
+                        avrg,
+                        ratio: {
+                            ...this.ratio(base, factor),
+                            diff: this.ratio(diff, factor),
+                            avrg: {
+                                5: this.ratio(avrg[5], factor),
+                                7: this.ratio(avrg[7], factor),
+                                14: this.ratio(avrg[14], factor),
+                                21: this.ratio(avrg[21], factor),
+                                28: this.ratio(avrg[28], factor),
+                            },
+                        },
+                        timestamp: value.timestamp,
+                    };
+                });
+                return mapped;
+            });
+        }
+        diff(value, index, all) {
+            if (!index) {
+                return {
+                    confirmed: 0,
+                    dead: 0,
+                    recovered: 0,
+                    active: 0,
+                };
+            }
+            else {
+                return {
+                    confirmed: value.confirmed - all[index - 1].confirmed,
+                    dead: value.deaths - all[index - 1].deaths,
+                    recovered: value.recovered - all[index - 1].recovered,
+                    active: this.active(value) - this.active(all[index - 1]),
+                };
+            }
+        }
+        avrg(back, index, all) {
+            if (!index) {
+                return {
+                    confirmed: all[index].confirmed,
+                    dead: all[index].deaths,
+                    recovered: all[index].recovered,
+                    active: this.active(all[index]),
+                };
+            }
+            else {
+                const sum = {
+                    confirmed: 0,
+                    dead: 0,
+                    recovered: 0,
+                    active: 0,
+                };
+                let iter = 0;
+                for (let idx = index; idx > index - back && idx > 0; idx--) {
+                    const diff = this.diff(all[idx], idx, all);
+                    sum.confirmed += diff.confirmed;
+                    sum.dead += diff.dead;
+                    sum.recovered += diff.recovered;
+                    sum.active += diff.active;
+                    iter++;
+                }
+                if (!iter) {
+                    return sum;
+                }
+                return {
+                    confirmed: sum.confirmed / iter,
+                    dead: sum.dead / iter,
+                    recovered: sum.recovered / iter,
+                    active: sum.active / iter,
+                };
+            }
+        }
+        active(value) {
+            return value.confirmed - value.deaths - value.recovered;
+        }
+        ratio(value, factor) {
+            return {
+                confirmed: value.confirmed / factor,
+                dead: value.dead / factor,
+                recovered: value.recovered / factor,
+                active: value.active / factor,
+            };
+        }
+    }
+    ServiceWorkerModule.ModelProcessor = ModelProcessor;
+})(ServiceWorkerModule || (ServiceWorkerModule = {}));

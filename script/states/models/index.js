@@ -1,1 +1,40 @@
-import{selector as se}from"recoil";import{aggregate as ne}from"model";export const AsyncSelector=se({key:"modelsAsyncSelector",get:()=>new Promise((e,r)=>{navigator.serviceWorker?navigator.serviceWorker.ready.then(o=>{const t=o.active||o.installing||o.waiting;if(!t)return void console.error("Missing serviceWorker");const s=new MessageChannel;s.port1.onmessage=r=>{e(r.data)},s.port1.onmessageerror=e=>{r(e)},t.postMessage({type:"GET_MODELS"},{transfer:[s.port2]})}).catch(console.error):r()})});export const AggregateSelector=se({key:"modelsAggregateSelector",get:async({get:e})=>{const r=e(AsyncSelector);return ne(r)}});
+import { selector } from 'recoil';
+import { aggregate } from 'model';
+const MODELS_SELECTOR_KEY = 'modelsAsyncSelector';
+export const ModelsSelector = selector({
+    key: MODELS_SELECTOR_KEY,
+    get: () => {
+        return new Promise((resolve, reject) => {
+            if (navigator.serviceWorker) {
+                navigator.serviceWorker.ready
+                    .then((registration) => {
+                    const worker = registration.active || registration.installing || registration.waiting;
+                    if (!worker) {
+                        console.error('Missing serviceWorker');
+                        return;
+                    }
+                    const channel = new MessageChannel();
+                    channel.port1.onmessage = (e) => {
+                        resolve(e.data);
+                    };
+                    channel.port1.onmessageerror = (e) => {
+                        reject(e);
+                    };
+                    worker.postMessage({ type: 'GET_MODELS' }, { transfer: [channel.port2] });
+                })
+                    .catch(console.error);
+            }
+            else {
+                reject();
+            }
+        });
+    },
+});
+const AGGREGATE_SELECTOR_KEY = 'modelsAggregateSelector';
+export const AggregateSelector = selector({
+    key: AGGREGATE_SELECTOR_KEY,
+    get: async ({ get }) => {
+        const models = get(ModelsSelector);
+        return aggregate(models);
+    },
+});

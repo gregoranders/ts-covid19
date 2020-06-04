@@ -1,1 +1,34 @@
-import e,{memo as o}from"react";import{ModelPropTypes as N,numberFormatter as S}from"model";export const Latest=({model:t})=>{const l=t.values[t.values.length-1];return e.createElement("table",{className:"latest"},e.createElement("thead",null,e.createElement("tr",null,e.createElement("th",null,"Population"),e.createElement("th",null,"Confirmed"),e.createElement("th",null,"Dead"),e.createElement("th",null,"Recovered"),e.createElement("th",null,"Active"))),e.createElement("tbody",null,e.createElement("tr",null,e.createElement("td",null,S(t.population)),e.createElement("td",null,S(l.confirmed)),e.createElement("td",null,S(l.dead)),e.createElement("td",null,S(l.recovered)),e.createElement("td",null,S(l.active))),e.createElement("tr",null,e.createElement("td",null,"Daily"),e.createElement("td",null,S(l.diff.confirmed)),e.createElement("td",null,S(l.diff.dead)),e.createElement("td",null,S(l.diff.recovered)),e.createElement("td",null,S(l.diff.active)))),e.createElement("tfoot",null,e.createElement("tr",null,e.createElement("th",{colSpan:5}))))};Latest.displayName="Latest",Latest.propTypes={model:N};export default o(Latest);
+import React, { memo } from 'react';
+import { ModelPropTypes, numberFormatter } from 'model';
+export const Latest = ({ model }) => {
+    const latest = model.values[model.values.length - 1];
+    return (React.createElement("table", { className: "latest" },
+        React.createElement("thead", null,
+            React.createElement("tr", null,
+                React.createElement("th", null, "Population"),
+                React.createElement("th", null, "Confirmed"),
+                React.createElement("th", null, "Dead"),
+                React.createElement("th", null, "Recovered"),
+                React.createElement("th", null, "Active"))),
+        React.createElement("tbody", null,
+            React.createElement("tr", null,
+                React.createElement("td", null, numberFormatter(model.population)),
+                React.createElement("td", null, numberFormatter(latest.confirmed)),
+                React.createElement("td", null, numberFormatter(latest.dead)),
+                React.createElement("td", null, numberFormatter(latest.recovered)),
+                React.createElement("td", null, numberFormatter(latest.active))),
+            React.createElement("tr", null,
+                React.createElement("td", null, "Daily"),
+                React.createElement("td", null, numberFormatter(latest.diff.confirmed)),
+                React.createElement("td", null, numberFormatter(latest.diff.dead)),
+                React.createElement("td", null, numberFormatter(latest.diff.recovered)),
+                React.createElement("td", null, numberFormatter(latest.diff.active)))),
+        React.createElement("tfoot", null,
+            React.createElement("tr", null,
+                React.createElement("th", { colSpan: 5 })))));
+};
+Latest.displayName = 'Latest';
+Latest.propTypes = {
+    model: ModelPropTypes,
+};
+export default memo(Latest);

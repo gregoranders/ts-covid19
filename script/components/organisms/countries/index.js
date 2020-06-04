@@ -1,1 +1,145 @@
-import e,{memo as o,useState as v}from"react";import{Link as C}from"react-router-dom";import i from"loading";import{ModelArrayPropTypes as D,nameFormatter as _,numberFormatter as S,urlFormatter as F,timeFormatter as I}from"model";import R,{Sort as A}from"model/sorter";const T=new R;export const Countries=({models:t})=>{const[l,r]=v(A.CONFIRMED_DESC);T.by=l;const a=e=>{r(l===e?l%2==0?e-1:e+1:e)};if(!t.length)return e.createElement(i,null);T.idx=t[0].values.length-1;const n=t.map(e=>({population:e.population,confirmed:e.values[T.idx].confirmed,dead:e.values[T.idx].dead,recovered:e.values[T.idx].recovered,active:e.values[T.idx].active,diff:{confirmed:e.values[T.idx].diff.confirmed,dead:e.values[T.idx].diff.dead,recovered:e.values[T.idx].diff.recovered,active:e.values[T.idx].diff.active},ratio:{confirmed:e.values[T.idx].ratio.confirmed,dead:e.values[T.idx].ratio.dead,recovered:e.values[T.idx].ratio.recovered,active:e.values[T.idx].ratio.active}})).reduce((e,t)=>({population:e.population+t.population,confirmed:e.confirmed+t.confirmed,dead:e.dead+t.dead,recovered:e.recovered+t.recovered,active:e.active+t.active,diff:{confirmed:e.diff.confirmed+t.diff.confirmed,dead:e.diff.dead+t.diff.dead,recovered:e.diff.recovered+t.diff.recovered,active:e.diff.active+t.diff.active},ratio:{confirmed:e.ratio.confirmed+t.ratio.confirmed,dead:e.ratio.dead+t.ratio.dead,recovered:e.ratio.recovered+t.ratio.recovered,active:e.ratio.active+t.ratio.active}})),c=(t[0].values[T.idx].timestamp-t[0].values[0].timestamp)/864e5;return e.createElement("table",null,e.createElement("thead",null,e.createElement("tr",null,e.createElement("th",null),e.createElement("th",null,I(t[0].values[T.idx].timestamp)),e.createElement("th",null),e.createElement("th",{colSpan:3},"Confirmed"),e.createElement("th",{colSpan:3},"Dead"),e.createElement("th",{colSpan:3},"Recovered"),e.createElement("th",{colSpan:3},"Active")),e.createElement("tr",null,e.createElement("th",null),e.createElement("th",{onClick:()=>a(A.NAME_ASC)},"Country/Region"),e.createElement("th",{onClick:()=>a(A.POPULATION_DESC)},"Population"),e.createElement("th",{onClick:()=>a(A.CONFIRMED_DESC)},"Total"),e.createElement("th",{onClick:()=>a(A.CONFIRMED_RATIO_DESC)},"/100k"),e.createElement("th",{onClick:()=>a(A.CONFIRMED_DIFF_DESC)},"Daily"),e.createElement("th",{onClick:()=>a(A.DEAD_DESC)},"Total"),e.createElement("th",{onClick:()=>a(A.DEAD_RATIO_DESC)},"/100k"),e.createElement("th",{onClick:()=>a(A.DEAD_DIFF_DESC)},"Daily"),e.createElement("th",{onClick:()=>a(A.RECOVERED_DESC)},"Total"),e.createElement("th",{onClick:()=>a(A.RECOVERED_RATIO_DESC)},"/100k"),e.createElement("th",{onClick:()=>a(A.RECOVERED_DIFF_DESC)},"Daily"),e.createElement("th",{onClick:()=>a(A.ACTIVE_DESC)},"Total"),e.createElement("th",{onClick:()=>a(A.ACTIVE_RATIO_DESC)},"/100k"),e.createElement("th",{onClick:()=>a(A.ACTIVE_DIFF_DESC)},"Daily"))),e.createElement("tbody",null,[...t].sort(T.sort).slice(0).map((t,l)=>{const r=t.values[T.idx];return e.createElement("tr",{key:l},e.createElement("td",null,l+1),e.createElement("td",null,e.createElement(C,{to:F(t)},_(t))),e.createElement("td",null,S(t.population)),e.createElement("td",null,S(r.confirmed)),e.createElement("td",null,S(r.ratio.confirmed)),e.createElement("td",null,S(r.diff.confirmed)),e.createElement("td",null,S(r.dead)),e.createElement("td",null,S(r.ratio.dead)),e.createElement("td",null,S(r.diff.dead)),e.createElement("td",null,S(r.recovered)),e.createElement("td",null,S(r.ratio.recovered)),e.createElement("td",null,S(r.diff.recovered)),e.createElement("td",null,S(r.active)),e.createElement("td",null,S(r.ratio.active)),e.createElement("td",null,S(r.diff.active)))})),e.createElement("tfoot",null,e.createElement("tr",null,e.createElement("th",null),e.createElement("th",null,"Day ",S(c+1)),e.createElement("th",null,S(n.population)),e.createElement("th",null,S(n.confirmed)),e.createElement("th",null,S(n.ratio.confirmed)),e.createElement("th",null,S(n.diff.confirmed)),e.createElement("th",null,S(n.dead)),e.createElement("th",null,S(n.ratio.dead)),e.createElement("th",null,S(n.diff.dead)),e.createElement("th",null,S(n.recovered)),e.createElement("th",null,S(n.ratio.recovered)),e.createElement("th",null,S(n.diff.recovered)),e.createElement("th",null,S(n.active)),e.createElement("th",null,S(n.ratio.active)),e.createElement("th",null,S(n.diff.active)))))};Countries.displayName="Countries",Countries.propTypes={models:D};export default o(Countries);
+import React, { memo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Loading from 'loading';
+import { ModelArrayPropTypes, nameFormatter, numberFormatter, urlFormatter, timeFormatter } from 'model';
+import Sorter, { Sort } from 'model/sorter';
+const sorter = new Sorter();
+export const Countries = ({ models }) => {
+    const [by, setBy] = useState(Sort.CONFIRMED_DESC);
+    sorter.by = by;
+    const sort = (sortBy) => {
+        if (by === sortBy) {
+            if (by % 2 === 0) {
+                setBy(sortBy - 1);
+            }
+            else {
+                setBy(sortBy + 1);
+            }
+        }
+        else {
+            setBy(sortBy);
+        }
+    };
+    if (!models.length) {
+        return React.createElement(Loading, null);
+    }
+    sorter.idx = models[0].values.length - 1;
+    const aggregated = models
+        .map((model) => {
+        return {
+            population: model.population,
+            confirmed: model.values[sorter.idx].confirmed,
+            dead: model.values[sorter.idx].dead,
+            recovered: model.values[sorter.idx].recovered,
+            active: model.values[sorter.idx].active,
+            diff: {
+                confirmed: model.values[sorter.idx].diff.confirmed,
+                dead: model.values[sorter.idx].diff.dead,
+                recovered: model.values[sorter.idx].diff.recovered,
+                active: model.values[sorter.idx].diff.active,
+            },
+            ratio: {
+                confirmed: model.values[sorter.idx].ratio.confirmed,
+                dead: model.values[sorter.idx].ratio.dead,
+                recovered: model.values[sorter.idx].ratio.recovered,
+                active: model.values[sorter.idx].ratio.active,
+            },
+        };
+    })
+        .reduce((prev, curr) => {
+        return {
+            population: prev.population + curr.population,
+            confirmed: prev.confirmed + curr.confirmed,
+            dead: prev.dead + curr.dead,
+            recovered: prev.recovered + curr.recovered,
+            active: prev.active + curr.active,
+            diff: {
+                confirmed: prev.diff.confirmed + curr.diff.confirmed,
+                dead: prev.diff.dead + curr.diff.dead,
+                recovered: prev.diff.recovered + curr.diff.recovered,
+                active: prev.diff.active + curr.diff.active,
+            },
+            ratio: {
+                confirmed: prev.ratio.confirmed + curr.ratio.confirmed,
+                dead: prev.ratio.dead + curr.ratio.dead,
+                recovered: prev.ratio.recovered + curr.ratio.recovered,
+                active: prev.ratio.active + curr.ratio.active,
+            },
+        };
+    });
+    const timeDiff = models[0].values[sorter.idx].timestamp - models[0].values[0].timestamp;
+    const day = timeDiff / (24 * 60 * 60 * 1000);
+    return (React.createElement("table", null,
+        React.createElement("thead", null,
+            React.createElement("tr", null,
+                React.createElement("th", null),
+                React.createElement("th", null, timeFormatter(models[0].values[sorter.idx].timestamp)),
+                React.createElement("th", null),
+                React.createElement("th", { colSpan: 3 }, "Confirmed"),
+                React.createElement("th", { colSpan: 3 }, "Dead"),
+                React.createElement("th", { colSpan: 3 }, "Recovered"),
+                React.createElement("th", { colSpan: 3 }, "Active")),
+            React.createElement("tr", null,
+                React.createElement("th", null),
+                React.createElement("th", { onClick: () => sort(Sort.NAME_ASC) }, "Country/Region"),
+                React.createElement("th", { onClick: () => sort(Sort.POPULATION_DESC) }, "Population"),
+                React.createElement("th", { onClick: () => sort(Sort.CONFIRMED_DESC) }, "Total"),
+                React.createElement("th", { onClick: () => sort(Sort.CONFIRMED_RATIO_DESC) }, "/100k"),
+                React.createElement("th", { onClick: () => sort(Sort.CONFIRMED_DIFF_DESC) }, "Daily"),
+                React.createElement("th", { onClick: () => sort(Sort.DEAD_DESC) }, "Total"),
+                React.createElement("th", { onClick: () => sort(Sort.DEAD_RATIO_DESC) }, "/100k"),
+                React.createElement("th", { onClick: () => sort(Sort.DEAD_DIFF_DESC) }, "Daily"),
+                React.createElement("th", { onClick: () => sort(Sort.RECOVERED_DESC) }, "Total"),
+                React.createElement("th", { onClick: () => sort(Sort.RECOVERED_RATIO_DESC) }, "/100k"),
+                React.createElement("th", { onClick: () => sort(Sort.RECOVERED_DIFF_DESC) }, "Daily"),
+                React.createElement("th", { onClick: () => sort(Sort.ACTIVE_DESC) }, "Total"),
+                React.createElement("th", { onClick: () => sort(Sort.ACTIVE_RATIO_DESC) }, "/100k"),
+                React.createElement("th", { onClick: () => sort(Sort.ACTIVE_DIFF_DESC) }, "Daily"))),
+        React.createElement("tbody", null, [...models]
+            .sort(sorter.sort)
+            .slice(0)
+            .map((model, index) => {
+            const latest = model.values[sorter.idx];
+            return (React.createElement("tr", { key: index },
+                React.createElement("td", null, index + 1),
+                React.createElement("td", null,
+                    React.createElement(Link, { to: urlFormatter(model) }, nameFormatter(model))),
+                React.createElement("td", null, numberFormatter(model.population)),
+                React.createElement("td", null, numberFormatter(latest.confirmed)),
+                React.createElement("td", null, numberFormatter(latest.ratio.confirmed)),
+                React.createElement("td", null, numberFormatter(latest.diff.confirmed)),
+                React.createElement("td", null, numberFormatter(latest.dead)),
+                React.createElement("td", null, numberFormatter(latest.ratio.dead)),
+                React.createElement("td", null, numberFormatter(latest.diff.dead)),
+                React.createElement("td", null, numberFormatter(latest.recovered)),
+                React.createElement("td", null, numberFormatter(latest.ratio.recovered)),
+                React.createElement("td", null, numberFormatter(latest.diff.recovered)),
+                React.createElement("td", null, numberFormatter(latest.active)),
+                React.createElement("td", null, numberFormatter(latest.ratio.active)),
+                React.createElement("td", null, numberFormatter(latest.diff.active))));
+        })),
+        React.createElement("tfoot", null,
+            React.createElement("tr", null,
+                React.createElement("th", null),
+                React.createElement("th", null,
+                    "Day ",
+                    numberFormatter(day + 1)),
+                React.createElement("th", null, numberFormatter(aggregated.population)),
+                React.createElement("th", null, numberFormatter(aggregated.confirmed)),
+                React.createElement("th", null, numberFormatter(aggregated.ratio.confirmed)),
+                React.createElement("th", null, numberFormatter(aggregated.diff.confirmed)),
+                React.createElement("th", null, numberFormatter(aggregated.dead)),
+                React.createElement("th", null, numberFormatter(aggregated.ratio.dead)),
+                React.createElement("th", null, numberFormatter(aggregated.diff.dead)),
+                React.createElement("th", null, numberFormatter(aggregated.recovered)),
+                React.createElement("th", null, numberFormatter(aggregated.ratio.recovered)),
+                React.createElement("th", null, numberFormatter(aggregated.diff.recovered)),
+                React.createElement("th", null, numberFormatter(aggregated.active)),
+                React.createElement("th", null, numberFormatter(aggregated.ratio.active)),
+                React.createElement("th", null, numberFormatter(aggregated.diff.active))))));
+};
+Countries.displayName = 'Countries';
+Countries.propTypes = {
+    models: ModelArrayPropTypes,
+};
+export default memo(Countries);
