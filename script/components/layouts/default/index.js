@@ -1,13 +1,1 @@
-import React, { memo, Suspense } from 'react';
-import { arrayOf as ArrayOf, element as IsElement } from 'prop-types';
-import Spinner from 'components/organisms/spinner';
-import Main from 'components/organisms/main';
-export const Layout = ({ children }) => {
-    return (React.createElement(Main, null,
-        React.createElement(Suspense, { fallback: React.createElement(Spinner, null) }, children)));
-};
-Layout.displayName = 'Layout';
-Layout.propTypes = {
-    children: ArrayOf(IsElement).isRequired,
-};
-export default memo(Layout);
+import e,{memo as o,Suspense as n}from"react";import{arrayOf as L,element as g}from"prop-types";import x from"components/organisms/spinner";import b from"components/organisms/main";import k from"components/organisms/footer";export const Layout=({children:o})=>e.createElement(e.Fragment,null,e.createElement(b,null,e.createElement(n,{fallback:e.createElement(x,null)},o)),e.createElement(k,null));Layout.displayName="Layout",Layout.propTypes={children:L(g).isRequired};export default o(Layout);

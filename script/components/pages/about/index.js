@@ -1,6 +1,1 @@
-import React, { memo } from 'react';
-export const AboutPage = () => {
-    return React.createElement("h2", null, AboutPage.displayName);
-};
-AboutPage.displayName = 'AboutPage';
-export default memo(AboutPage);
+import e,{memo as o}from"react";import{useRecoilValue as V}from"recoil";import{ModelsSelector as J}from"states/models";import{default as O}from"components/organisms/top";export const AboutPage=()=>{const o=V(J);return e.createElement(O,{models:o})};AboutPage.displayName="AboutPage";export default o(AboutPage);

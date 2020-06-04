@@ -1,10 +1,1 @@
-import React, { memo } from 'react';
-import { arrayOf as ArrayOf, element as IsElement } from 'prop-types';
-export const Main = ({ children }) => {
-    return React.createElement("main", null, children);
-};
-Main.displayName = 'Main';
-Main.propTypes = {
-    children: ArrayOf(IsElement.isRequired).isRequired,
-};
-export default memo(Main);
+import e,{memo as o}from"react";import{arrayOf as L,element as g}from"prop-types";export const Main=({children:a})=>e.createElement("main",null,a);Main.displayName="Main",Main.propTypes={children:L(g.isRequired).isRequired};export default o(Main);
