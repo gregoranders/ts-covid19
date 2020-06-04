@@ -1,0 +1,1 @@
+import{atom as oo}from"recoil";export const TypeAtom=oo({key:"typeAtom",default:"confirmed"});export default TypeAtom;

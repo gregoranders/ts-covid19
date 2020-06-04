@@ -1,1 +1,1 @@
-import{selector as se}from"recoil";import{aggregate as le}from"model";import{ModelsSelector as W}from"states/models";export const WorldSelector=se({key:"worldSelector",get:async({get:e})=>{const o=e(W);return le(o)}});export default WorldSelector;
+import{selector as ge}from"recoil";import{aggregate as pe}from"model";import{ModelsSelector as ee}from"states/models";export const WorldSelector=ge({key:"worldSelector",get:async({get:e})=>{const o=e(ee);return pe(o)}});export default WorldSelector;
