@@ -1,0 +1,1 @@
+import e,{memo as o}from"react";export const Header=()=>e.createElement("header",null,e.createElement("h1",null,"ts-covid19"));Header.displayName="Header";export default o(Header);

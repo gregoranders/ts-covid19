@@ -1,0 +1,1 @@
+import e,{memo as o}from"react";export const AboutPage=()=>e.createElement("h2",null,AboutPage.displayName);AboutPage.displayName="AboutPage";export default o(AboutPage);

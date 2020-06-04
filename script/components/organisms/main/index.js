@@ -1,0 +1,1 @@
+import e,{memo as o}from"react";import{arrayOf as L,element as g}from"prop-types";export const Main=({children:a})=>e.createElement("main",null,a);Main.displayName="Main",Main.propTypes={children:L(g.isRequired).isRequired};export default o(Main);

@@ -1,0 +1,1 @@
+import e,{memo as o}from"react";import{number as q}from"prop-types";export const Footer=({year:o})=>e.createElement("footer",null,"© ",o);Footer.displayName="Footer",Footer.defaultProps={year:(new Date).getUTCFullYear()},Footer.propTypes={year:q.isRequired};export default o(Footer);

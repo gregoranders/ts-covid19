@@ -1,0 +1,1 @@
+import e,{memo as o}from"react";import{NavLink as H}from"react-router-dom";export const Nav=()=>e.createElement("nav",null,e.createElement("ol",null,e.createElement("li",null,e.createElement(H,{to:"/"},"Home")),e.createElement("li",null,e.createElement(H,{to:"/about"},"About"))));Nav.displayName="Nav";export default o(Nav);
