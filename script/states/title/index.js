@@ -1,0 +1,1 @@
+import{atom as oo}from"recoil";export const TitleAtom=oo({key:"titleAtom",default:"ts-covid19"});export default TitleAtom;

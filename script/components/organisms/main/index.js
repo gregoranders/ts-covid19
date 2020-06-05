@@ -1,1 +1,1 @@
-import e,{memo as o}from"react";import{arrayOf as g,element as L}from"prop-types";export const Main=({children:a})=>e.createElement("main",null,a);Main.displayName="Main",Main.propTypes={children:g(L.isRequired).isRequired};export default o(Main);
+import e,{memo as o}from"react";import{arrayOf as L,element as q}from"prop-types";export const Main=({children:a})=>e.createElement("main",{className:"w3-container w3-responsive"},a);Main.displayName="Main",Main.propTypes={children:L(q.isRequired).isRequired};export default o(Main);

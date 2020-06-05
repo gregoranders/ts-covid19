@@ -1,0 +1,1 @@
+import e,{memo as o}from"react";export const TestPage=()=>e.createElement("div",{className:"w3-container w3-center"},TestPage.displayName);TestPage.displayName="TestPage";export default o(TestPage);

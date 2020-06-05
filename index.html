@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="ts-covid19 - Covid-19 Dashboard in TypeScript" />
     <meta name="keywords" content="COVID-19, Dashboard, JHU, CSSE, Johns Hopkins University, TypeScript, React, React-Router, FontAwesome, Recharts" />
     <meta name="author" content="Gregor Anders" />
@@ -74,8 +74,6 @@
           "application": "/ts-covid19/script/application.js",
           "loading": "/ts-covid19/script/loading.js",
 
-          "registerServiceWorker": "/ts-covid19/script/registerServiceWorker.js",
-
           "model": "/ts-covid19/script/model/index.js",
           "model/sorter": "/ts-covid19/script/model/sorter/index.js",
 
@@ -83,6 +81,7 @@
           "states/world": "/ts-covid19/script/states/world/index.js",
           "states/version": "/ts-covid19/script/states/version/index.js",
           "states/avrg": "/ts-covid19/script/states/avrg/index.js",
+          "states/title": "/ts-covid19/script/states/title/index.js",
           "states/type": "/ts-covid19/script/states/type/index.js",
           "states/sort": "/ts-covid19/script/states/sort/index.js",
 
@@ -97,14 +96,15 @@
           "components/organisms/latest": "/ts-covid19/script/components/organisms/latest/index.js",
           "components/organisms/plot": "/ts-covid19/script/components/organisms/plot/index.js",
           "components/organisms/series": "/ts-covid19/script/components/organisms/series/index.js",
-          "components/organisms/top": "/ts-covid19/script/components/organisms/top/index.js",
 
-          "components/atoms/refresh": "/ts-covid19/script/components/atoms/refresh/index.js",
+          "components/atoms/navLink": "/ts-covid19/script/components/atoms/navLink/index.js",
+          "components/atoms/sortableTh": "/ts-covid19/script/components/atoms/sortableTh/index.js",
 
           "components/pages/about": "/ts-covid19/script/components/pages/about/index.js",
           "components/pages/detail": "/ts-covid19/script/components/pages/detail/index.js",
           "components/pages/font": "/ts-covid19/script/components/pages/font/index.js",
-          "components/pages/home": "/ts-covid19/script/components/pages/home/index.js"
+          "components/pages/home": "/ts-covid19/script/components/pages/home/index.js",
+          "components/pages/test": "/ts-covid19/script/components/pages/test/index.js"
         }
       }
     </script>
@@ -133,9 +133,9 @@
     <base href="/ts-covid19/" />
     <title>ts-covid19 - Covid-19 Dashboard in TypeScript</title>
   </head>
-  <body id="app">
+  <body id="app" class="w3-light-grey">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="centered loading">
+    <div class="loading">
       <h1>Please ensure your browser supports ES module loading</h1>
     </div>
     <script defer type="module-shim">
