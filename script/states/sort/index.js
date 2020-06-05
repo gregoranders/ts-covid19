@@ -1,0 +1,1 @@
+import{atom as to}from"recoil";import{Sort as V}from"model/sorter";export const TypeAtom=to({key:"sortAtom",default:V.CONFIRMED_DESC});export default TypeAtom;
